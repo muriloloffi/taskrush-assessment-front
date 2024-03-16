@@ -1,7 +1,7 @@
 import { Router, Route } from 'react-router-dom'
 import './App.css'
-import Project from './Project'
-import Projects from './Projects'
+import Project from './components/Project'
+import Projects from './components/Projects'
 
 function App() {
 

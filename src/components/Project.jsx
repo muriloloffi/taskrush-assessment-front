@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { useFetch } from './useFetch';
+import { useFetch } from '../useFetch';
 import Task from './Task';
 
 export function Project() {
@@ -27,14 +27,9 @@ export function Project() {
     
     return (
         <div>
-        <h1>{project.name}</h1>
         <Link to="/">Back to projects</Link>
-        <p>
-            <strong>Created at:</strong> {format(new Date(project.createdAt), 'PPpp')}
-        </p>
-        <p>
-            <strong>Updated at:</strong> {format(new Date(project.updatedAt), 'PPpp')}
-        </p>
+        <h1>{project.name}</h1>
+        <p>{project.description}</p>
         <h2>Tasks</h2>
         <ul>
             {project.tasks.map((task) => (
