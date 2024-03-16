@@ -4,9 +4,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Projects from "./components/Projects";
 import Project from "./components/Project";
+import ErrorPage from "./error-page";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Projects /> },
+  {
+    path: "/",
+    element: <Projects />,
+    errorElement: <ErrorPage />,
+  },
   { path: "/project/:id", element: <Project /> },
 ]);
 

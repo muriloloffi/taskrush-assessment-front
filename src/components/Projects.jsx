@@ -5,7 +5,7 @@ function Projects() {
   const { data: projects, loading, error } = useFetch("/api/projects");
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  // if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="flex flex-col items-start">
