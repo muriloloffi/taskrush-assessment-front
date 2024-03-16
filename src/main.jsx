@@ -7,7 +7,7 @@ import Project from "./components/Project";
 
 const router = createBrowserRouter([
   { path: "/", element: <Projects /> },
-  { path: "/project/:id", component: Project },
+  { path: "/project/:id", element: <Project /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
