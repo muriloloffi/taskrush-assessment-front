@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { useAxios } from "../helpers/useAxios";
+import { workIntervalsRoute } from "../helpers/constants";
 
 function Task({ task }) {
   const [isRunning, setIsRunning] = useState(false);
@@ -18,17 +19,21 @@ function Task({ task }) {
 
   useEffect(() => {
     const runningInterval = task.work_intervals.find(
-      (interval) => !interval.stop
+      (interval) => !interval.end
     );
     if (runningInterval) {
       setIsRunning(true);
     }
 
     const elapsedTime = task.work_intervals.reduce((total, interval) => {
-      if (interval.stop) {
-        return total + (interval.stop - interval.start);
+      if (interval.end) {
+        return (
+          total +
+          (new Date(interval.end).getTime() -
+            new Date(interval.start).getTime())
+        );
       } else {
-        return total + (Date.now() - interval.start);
+        return total + (Date.now() - new Date(interval.start).getTime());
       }
     }, 0);
 
@@ -37,9 +42,9 @@ function Task({ task }) {
 
   const startClock = async () => {
     try {
-      await axios.post("/api/work-interval", {
-        ownerId: task.ownerId,
-        taskId: task.id,
+      await useAxios.post(workIntervalsRoute, {
+        user_id: task.owner_id,
+        task_id: task.id,
       });
       setIsRunning(true);
     } catch (error) {
@@ -47,23 +52,34 @@ function Task({ task }) {
     }
   };
 
-  const stopClock = async () => {
+  const endClock = async () => {
     try {
-      await axios.put("/api/work-interval", { ownerId: task.ownerId });
+      await useAxios.put(workIntervalsRoute, { user_id: task.owner_id });
       setIsRunning(false);
     } catch (error) {
       console.error(error);
     }
   };
 
+  function formatClock(elapsedTime) {
+    let date = new Date(elapsedTime);
+    const seconds = date.getSeconds().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
   return (
-    <div className="flex flex-row">
-      <img src={task.owner} alt="Owner" />
+    <div id={task.id} className="flex flex-row">
+      <div>
+        <img src={task.owner} alt="Owner" />
+      </div>
       <h2>{task.title}</h2>
       <p>{task.description}</p>
-      <div>{elapsedTime}</div>
+      <div>{formatClock(elapsedTime)}</div>
       {isRunning ? (
-        <button onClick={stopClock}>Pause</button>
+        <button onClick={endClock}>Pause</button>
       ) : (
         <button onClick={startClock}>Start</button>
       )}
