@@ -34,9 +34,6 @@ export function Project() {
             </li>
           ))}
         </ul>
-        <p>
-          <strong>Current time:</strong> {format(time, "PPpp")}
-        </p>
       </div>
     </>
   );
