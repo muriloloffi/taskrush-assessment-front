@@ -19,22 +19,26 @@ export function Project() {
   }
 
   return (
-    <div>
-      <Link to="/">Back to projects</Link>
-      <h1>{project.name}</h1>
-      <p>{project.description}</p>
-      <h2>Tasks</h2>
-      <ul>
-        {project.tasks.map((task) => (
-          <li key={task.id}>
-            <Task task={task} />
-          </li>
-        ))}
-      </ul>
-      <p>
-        <strong>Current time:</strong> {format(time, "PPpp")}
-      </p>
-    </div>
+    <>
+      <Link to="/">Fechar ✕</Link>
+      <div className="flex flex-col">
+        <h1 className="">{project.title}</h1>
+        <p>{project.description}</p>
+        <h2>Tasks</h2>
+        <ul>
+          {project.tasks.map((task) => (
+            <li key={task.id}>
+              <div>
+                <Task task={task} />
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <strong>Current time:</strong> {format(time, "PPpp")}
+        </p>
+      </div>
+    </>
   );
 }
 
