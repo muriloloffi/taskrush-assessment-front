@@ -10,14 +10,13 @@ function Projects() {
 
   return (
     <>
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start w-80 border-r border-solid border-slate-200">
         {projects.map((project) => (
-          <div
-            key={project.id}
-            className="p-4 m-2 bg-gray-100 rounded-md shadow-md"
-          >
-            <Link to={`/project/${project.id}`}>{project.title}</Link>
-          </div>
+          <Link to={`/project/${project.id}`} key={project.id}>
+            <div className="p-4 m-2 bg-gray-300 rounded-md shadow-md text-blue-500 hover:shadow-slate-300">
+              {project.title}
+            </div>
+          </Link>
         ))}
       </div>
       <div
