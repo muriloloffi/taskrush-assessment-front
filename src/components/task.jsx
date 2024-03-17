@@ -10,7 +10,7 @@ function Task({ task }) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (isRunning) {
-        setElapsedTime((prevTime) => prevTime + 1);
+        setElapsedTime((prevTime) => prevTime + 1000);
       }
     }, 1000);
 
@@ -62,10 +62,15 @@ function Task({ task }) {
   };
 
   function formatClock(elapsedTime) {
-    let date = new Date(elapsedTime);
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    const hours = Math.floor(elapsedTime / (1000 * 60 * 60))
+      .toString()
+      .padStart(2, "0");
+    const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = Math.floor((elapsedTime / 1000) % 60)
+      .toString()
+      .padStart(2, "0");
 
     return `${hours}:${minutes}:${seconds}`;
   }
