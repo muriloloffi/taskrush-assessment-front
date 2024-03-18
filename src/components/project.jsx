@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useFetch } from "../useFetch";
+import { useFetch } from "../helpers/useFetch";
 import Task from "./task";
 
 export function Project() {

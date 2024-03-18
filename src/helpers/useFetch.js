@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { routes } from "./helpers/constants";
+import { routes } from "./constants";
 
 function useFetch(partialUrl) {
   const url = routes.baseURL + partialUrl;
