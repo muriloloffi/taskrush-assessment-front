@@ -2,11 +2,10 @@ import { useFetch } from "../useFetch";
 import { Link, Outlet } from "react-router-dom";
 
 function Projects() {
-  const { data: projects, loading, error } = useFetch("/api/projects");
+  const { data: projects, loading } = useFetch("/api/projects");
   const loadingStyles = "opacity-25";
 
   if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
 
   return (
     <>
