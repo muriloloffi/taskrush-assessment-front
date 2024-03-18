@@ -13,20 +13,27 @@ export function Project() {
 
   return (
     <>
-      <Link to="/">Fechar ✕</Link>
-      <div className="flex flex-col">
-        <h1 className="">{project.title}</h1>
-        <p>{project.description}</p>
-        <h2>Tasks</h2>
-        <ul>
+      <Link to="/">
+        <div>Fechar ✕</div>
+      </Link>
+      <div className="flex flex-col rounded">
+        <div className="flex flex-col justify-center shadow rounded bg-white">
+          <div className="flex flex-row">
+            <span className="font-medium">Projeto:&nbsp;</span>
+            <h1>{project.title}</h1>
+          </div>
+          <div className="flex flex-row">
+            <span className="font-medium">Descrição:&nbsp;</span>
+            <p>{project.description}</p>
+          </div>
+          <hr />
+        </div>
+        <div className="flex flex-col">
+          <h2 className="text-lg font-medium mt-2">Tasks:</h2>
           {project.tasks.map((task) => (
-            <li key={task.id}>
-              <div>
-                <Task task={task} />
-              </div>
-            </li>
+            <Task task={task} key={"task" + task.id} />
           ))}
-        </ul>
+        </div>
       </div>
     </>
   );

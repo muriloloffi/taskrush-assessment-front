@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { useAxios } from "../helpers/useAxios";
-import { workIntervalsRoute } from "../helpers/constants";
+import { workIntervalsRoute, emptyAvatar } from "../helpers/constants";
 
 function Task({ task }) {
   const [isRunning, setIsRunning] = useState(false);
@@ -72,18 +72,36 @@ function Task({ task }) {
   }
 
   return (
-    <div key={"task" + task.id} className="flex flex-row">
-      <div>
-        <img src={task.owner.name} alt="Owner" />
+    <div className="flex flex-row justify-between bg-white my-2 shadow h-20">
+      <div className="h-full mx-4 max-h-12">
+        <span>Owner:</span>
+        <img
+          title={task.owner.name}
+          height={64}
+          width={64}
+          className="max-w-full h-full rounded-full my-0 mx-auto"
+          src={task.owner.profile_picture_path ?? emptyAvatar}
+          alt="Owner"
+        />
       </div>
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
-      <div>{formatClock(elapsedTime)}</div>
-      {isRunning ? (
-        <button onClick={endClock}>Pause</button>
-      ) : (
-        <button onClick={startClock}>Start</button>
-      )}
+      <div className="min-w-40 mx-2">
+        <h2>{task.title}</h2>
+      </div>
+      <div className="min-w-48 w-full">
+        <p>{task.description}</p>
+      </div>
+      <div className="flex flex-row">
+        <div className="flex flex-row items-center m-4">
+          {formatClock(elapsedTime)}
+        </div>
+        <div className="flex flex-row justify-between m-4">
+          {isRunning ? (
+            <button onClick={endClock}>⏸️</button>
+          ) : (
+            <button onClick={startClock}>▶️</button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
