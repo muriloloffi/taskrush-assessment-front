@@ -1,6 +1,6 @@
 import axios from "axios";
-import { baseApiUrl } from "./constants";
+import { routes } from "./constants";
 
 export const useAxios = axios.create({
-  baseURL: baseApiUrl,
+  baseURL: routes.baseURL,
 });
