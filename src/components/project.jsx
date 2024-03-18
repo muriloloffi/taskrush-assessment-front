@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { useFetch } from "../useFetch";
 import Task from "./task";
 
 export function Project() {
   const { id } = useParams();
-  const { data: project, error, loading } = useFetch(`/api/project/${id}`);
-  const [time, setTime] = useState(new Date());
+  const { data: project, loading } = useFetch(`/api/project/${id}`);
 
   if (loading) {
     return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
   }
 
   return (
