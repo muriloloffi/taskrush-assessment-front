@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { useAxios } from "../helpers/useAxios";
-import { workIntervalsRoute, emptyAvatar } from "../helpers/constants";
+import { routes } from "../helpers/constants";
 
 function Task({ task }) {
   const [isRunning, setIsRunning] = useState(false);
@@ -38,7 +38,7 @@ function Task({ task }) {
 
   const startClock = async () => {
     try {
-      await useAxios.post(workIntervalsRoute, {
+      await useAxios.post(routes.workIntervalsRoute, {
         user_id: task.owner_id,
         task_id: task.id,
       });
@@ -50,7 +50,7 @@ function Task({ task }) {
 
   const endClock = async () => {
     try {
-      await useAxios.put(workIntervalsRoute, { user_id: task.owner_id });
+      await useAxios.put(routes.workIntervalsRoute, { user_id: task.owner_id });
       setIsRunning(false);
     } catch (error) {
       console.error(error);
@@ -80,7 +80,7 @@ function Task({ task }) {
           height={64}
           width={64}
           className="max-w-full h-full rounded-full my-0 mx-auto"
-          src={task.owner.profile_picture_path ?? emptyAvatar}
+          src={task.owner.profile_picture_path ?? routes.emptyAvatar}
           alt="Owner"
         />
       </div>

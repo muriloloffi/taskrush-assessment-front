@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { routes } from "./helpers/constants";
 
 function useFetch(partialUrl) {
-  const baseUrl = "http://localhost:8000";
-  const url = baseUrl + partialUrl;
+  const url = routes.baseURL + partialUrl;
 
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);

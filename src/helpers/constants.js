@@ -1,3 +1,6 @@
-export const baseApiUrl = "http://localhost:8000";
-export const workIntervalsRoute = "/api/work-intervals";
-export const emptyAvatar = "/avatar_vazio.svg";
+export const routes = {
+  baseURL: "http://localhost:8000",
+  workIntervalsRoute: "/api/work-intervals",
+  projectsRoute: "/api/projects",
+  emptyAvatar: "/avatar_vazio.svg",
+};
