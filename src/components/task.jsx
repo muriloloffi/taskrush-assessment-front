@@ -26,15 +26,11 @@ function Task({ task }) {
     }
 
     const elapsedTime = task.work_intervals.reduce((total, interval) => {
-      if (interval.end) {
-        return (
-          total +
-          (new Date(interval.end).getTime() -
-            new Date(interval.start).getTime())
-        );
-      } else {
-        return total + (Date.now() - new Date(interval.start).getTime());
+      if (!interval.end) {
+        return total + (Date.now() - Date.parse(interval.start + "Z"));
       }
+
+      return total + (Date.parse(interval.end) - Date.parse(interval.start));
     }, 0);
 
     setElapsedTime(elapsedTime);
@@ -78,7 +74,7 @@ function Task({ task }) {
   return (
     <div key={"task" + task.id} className="flex flex-row">
       <div>
-        <img src={task.owner} alt="Owner" />
+        <img src={task.owner.name} alt="Owner" />
       </div>
       <h2>{task.title}</h2>
       <p>{task.description}</p>
