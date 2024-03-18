@@ -5,13 +5,17 @@ import "./index.css";
 import Projects from "./components/projects";
 import Project from "./components/project";
 import ErrorPage from "./error-page";
+import ProjectForm from "./components/projectForm";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Projects />,
     errorElement: <ErrorPage />,
-    children: [{ path: "/project/:id", element: <Project /> }],
+    children: [
+      { path: "/project/new", element: <ProjectForm /> },
+      { path: "/project/:id", element: <Project /> },
+    ],
   },
 ]);
 
