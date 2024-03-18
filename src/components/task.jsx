@@ -76,7 +76,7 @@ function Task({ task }) {
   }
 
   return (
-    <div id={task.id} className="flex flex-row">
+    <div key={"task" + task.id} className="flex flex-row">
       <div>
         <img src={task.owner} alt="Owner" />
       </div>
